@@ -1,0 +1,272 @@
+<!DOCTYPE HTML>
+<!-- Zhen Xiao -->
+<html>
+	<head>
+		<title>Robot Builder</title>
+		<style>
+			.red
+			{
+				background-color:red;
+			}
+			.green
+			{
+				background-color:yellow;
+			}
+			.blue
+			{
+				background-color:dodgerBlue;
+			}
+			
+			#solar
+			{
+				background-color:#FFFF33;
+			}
+			#nuclear
+			{
+				background-color:#99FF00;
+			}
+			#electric
+			{
+				background-color:#66FFFF;
+			}
+			
+			.robotStuff
+			{
+				text-align:left;
+				width:50%;
+				float:right;
+			}
+			
+			h1
+			{
+				text-align:center;
+				font-weight:normal;
+				font-family:Verdana;
+			}
+			
+			#robotPic
+			{
+				text-align:left;
+				width:50%;
+				float:left;
+			}
+			#selectedRobot
+			{
+				width:50%;
+				height:300px;
+			}
+			#robotChoice
+			{
+				height:125px;
+			}
+			#robotButton
+			{
+				width:24%;
+			}
+		</style>
+		<script>
+		
+			function initialize()
+			{
+				pow = document.getElementById("atk");
+				eng = document.getElementById("hp");
+				spe = document.getElementById("spd");	
+				sor = document.getElementById("bat");
+				
+				powerValue = 0;
+				energyValue = 0;
+				speedValue = 0;
+				
+				mode = document.getElementById("btlMode");
+				defense = true;
+				
+				mtxt = document.getElementById("modeText");
+				power = false;
+				battleText = document.getElementById("batleDiv")
+				
+				pMode = document.getElementById("powMode")
+				ptxt = document.getElementById("powText");
+				powerText = document.getElementById("powerDiv")
+				
+			}
+			
+			function adjustPower(type,value)
+			{
+				if (type == 1)
+				{
+					powerValue += value;
+					
+					if (powerValue < 0)
+					{
+						powerValue = 0;
+					}
+				}
+				
+				if (type == 2)
+				{
+					energyValue += value;
+					
+					if (energyValue < 0)
+					{
+						energyValue = 0;
+					}
+				}
+				
+				if (type == 3)
+				{
+					speedValue += value;
+					
+					if (speedValue < 0)
+					{
+						speedValue = 0;
+					}
+				}
+			}
+
+			function adjustBattery(batType)
+			{
+				if (batType == 1)	
+				{
+					sor.innerHTML = "Solar";
+				}
+				
+				if (batType == 2)
+				{
+					sor.innerHTML = "Nuclear";
+				}
+				
+				if (batType == 3)
+				{
+					sor.innerHTML = "Electric";
+				}
+			}
+			
+			function switchMode()
+			{
+				if (defense == false)
+				{
+					defense = !defense;
+					mode.innerHTML = "Attack";
+					mtxt.innerHTML = "Defense";
+					battleText.style.fontStyle = "normal";
+				}
+				else
+				{
+					defense = !defense;
+					mode.innerHTML = "Defense";
+					mtxt.innerHTML = "Attack";
+					battleText.style.fontStyle = "italic";
+				}
+			}
+			
+			function switchPower()
+			{
+				if (power == false)
+				{
+					power = !power;
+					pMode.innerHTML = "On";
+					ptxt.innerHTML = "Off";
+					powerDiv.style.fontWeight = "bold";
+					
+				}
+				else
+				{
+					power = !power;
+					pMode.innerHTML = "Off";
+					ptxt.innerHTML = "On";
+					powerDiv.style.fontWeight = "normal";
+				}
+			}
+			function drawStats()
+			{
+				pow.innerHTML = powerValue;
+				eng.innerHTML = energyValue;
+				spe.innerHTML = speedValue;
+			}
+			
+			function selectRobotImage(rImage)
+			{
+				
+				if (rImage == 1)
+				{
+					document.getElementById("selectedRobot").src = "images/Robot 1.png";
+				}
+				
+				if (rImage == 2)
+				{
+					document.getElementById("selectedRobot").src = "images/Robot 2.png";
+				}
+				
+				if(rImage == 3)
+				{
+					document.getElementById("selectedRobot").src = "images/Robot 3.png";
+				}
+				
+				if(rImage == 4)
+				{
+					document.getElementById("selectedRobot").src = "images/Robot 4.png";
+				}
+			}
+			
+		</script>
+	</head>
+	<body onload= "initialize();">
+		<!-- Lists of the statistics of the robot and the buttons to change the statistics -->
+		
+		<h1>Robot Builder</h1>
+		<hr />
+		
+		<div id = "robotPic">
+			<img id= "selectedRobot" src = "images/Robot 1.png" />
+			<div>
+				<button id = "robotButton" onclick = "selectRobotImage(1);"><img id = "robotChoice" src = "images/Robot 1.png" /></button>
+				<button id = "robotButton" onclick = "selectRobotImage(2);"><img id = "robotChoice" src = "images/Robot 2.png" /></button>
+				<button id = "robotButton" onclick = "selectRobotImage(3);"><img id = "robotChoice" src = "images/Robot 3.png" /></button>
+				<button id = "robotButton" onclick = "selectRobotImage(4);"><img id = "robotChoice" src = "images/Robot 4.png" /></button>
+			</div>
+		</div>
+		<div class = "robotStuff">
+			<div class = "red">
+				Power:<span id = atk>0</span>
+				<div>
+					<button onclick = "adjustPower(1,1);drawStats();">Add Power</button>
+					<button onclick = "adjustPower(1,-1);drawStats();">Subtract Power</button>
+				</div>
+			</div>
+			
+			<div class = "green">
+				Energy:<span id = hp>0</span>
+				<div>
+					<button onclick = "adjustPower(2,1);drawStats();">Add Energy</button>
+					<button onclick = "adjustPower(2,-1);drawStats();">Subtract Energy</button>
+				</div>
+			</div>
+			
+			<div class = "blue">
+				Speed:<span id = spd>0</span>
+				<div>
+					<button onclick = "adjustPower(3,1);drawStats();">Add Speed</button>
+					<button onclick = "adjustPower(3,-1);drawStats();">Subtract Speed</button>
+				</div>
+			</div>
+			
+			<div>
+				Battery Type:<span id = bat>None</span>
+				<div>
+					<button id = "solar" onclick = "adjustBattery(1);">Solar Battery</button>
+					<button id = "nuclear" onclick = "adjustBattery(2);">Nuclear Battery</button>
+					<button id = "electric" onclick = "adjustBattery(3);">Electric Battery</button>
+				</div>
+			</div>
+			
+			<div id = "batleDiv">
+				Battle Mode:<span id = "btlMode">Attack</span> 
+				<button id = "modeButton" onclick = "switchMode();">Switch to <span id = "modeText">Defense</span> Mode</button>
+			</div>
+			
+			<div id = "powerDiv">
+				Power Mode:<span id = "powMode">Off</span>
+				<button id = "powButton" onclick = "switchPower();">Turn Robot <span id = "powText">On</span></button>
+		</div>
+	</body>
+</html>
