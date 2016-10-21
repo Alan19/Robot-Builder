@@ -3,18 +3,19 @@
 <html>
 	<head>
 		<title>Robot Builder</title>
+		<link href="https://fonts.googleapis.com/css?family=Orbitron|Roboto+Mono" rel="stylesheet">
 		<style>
 			.red
 			{
-				background-color:red;
+				background: -webkit-linear-gradient(0deg, red, white);
 			}
 			.green
 			{
-				background-color:yellow;
+				background: -webkit-linear-gradient(0deg, yellow, white);
 			}
 			.blue
 			{
-				background-color:dodgerBlue;
+				background: -webkit-linear-gradient(0deg, dodgerBlue, white);
 			}
 			
 			#solar
@@ -37,11 +38,16 @@
 				float:right;
 			}
 			
+			.robotStuff *{
+				border-radius:3px;
+				font:12pt roboto mono;
+			}
+			
 			h1
 			{
 				text-align:center;
-				font-weight:normal;
-				font-family:Verdana;
+				font-family: orbitron;
+				font-weight: normal;
 			}
 			
 			#robotPic
@@ -267,6 +273,7 @@
 			<div id = "powerDiv">
 				Power Mode:<span id = "powMode">Off</span>
 				<button id = "powButton" onclick = "switchPower();">Turn Robot <span id = "powText">On</span></button>
+			</div>
 		</div>
 	</body>
 </html>
